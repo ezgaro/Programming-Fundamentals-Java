@@ -16,7 +16,6 @@ public class Main {
             String[] columData = scanner.nextLine().split(" ");
             for (int j = 0; j < cols; j++) {
                 matrix[i][j] = Integer.parseInt(columData[j]);
-
             }
         }
 
