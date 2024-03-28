@@ -1,0 +1,52 @@
+package graphs;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class AreasInMatrix_02 {
+	
+	
+	public static class Edge {
+		int[] source;
+		int[] destination;
+
+		public Edge(int sRow, int sCol, int dRow, int dCol) {
+			this.source = new int[] {sRow, sCol};
+			this.destination = new int[] {dRow, dCol};
+		}
+	}
+	
+	public static List<Edge> graph = new ArrayList<>();
+	public static char[][] matrix;
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		
+		int rows = Integer.parseInt(scanner.nextLine());
+		
+		matrix = new char[rows][];
+		
+		for (int i = 0; i < rows; i++) {
+			matrix[i] = scanner.nextLine().toCharArray();
+		}
+		
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				dfs(0,0);				
+			}
+		}
+		
+		
+	}
+
+	private static void dfs(int row, int col) {
+		if (isOutOfBounds(row, col) || matrix[row][col] == 'v' || matrix[row][col] == 'x') {
+			return;
+		}
+	}
+
+	private static boolean isOutOfBounds(int row, int col) {
+		return row < 0 || row >= matrix.length || col < 0 || col >= matrix[row].length;
+	}
+}

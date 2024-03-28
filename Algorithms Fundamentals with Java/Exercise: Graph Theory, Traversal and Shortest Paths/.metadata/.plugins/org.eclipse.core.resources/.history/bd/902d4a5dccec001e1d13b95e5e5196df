@@ -1,0 +1,78 @@
+package graphs;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class AreasInMatrix_02 {
+	
+	
+	public static class Edge {
+		int[] source;
+		int[] destination;
+
+		public Edge(int sRow, int sCol, int dRow, int dCol) {
+			this.source = new int[] {sRow, sCol};
+			this.destination = new int[] {dRow, dCol};
+		}
+	}
+	
+	public static List<Edge> graph = new ArrayList<>();
+	public static boolean[][] visited;
+	public static boolean[][] visitedNode;
+	public static char[][] matrix;
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		
+		int rows = Integer.parseInt(scanner.nextLine());
+		
+		matrix = new char[rows][];
+		visited = new boolean[rows][];
+		
+		for (int i = 0; i < rows; i++) {
+			matrix[i] = scanner.nextLine().toCharArray();
+			visited[i] = new boolean[matrix[i].length];
+		}
+		
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				if(!visited[i][j])
+				dfs(i,j, matrix[i][j]);				
+			}
+		}
+		
+		for (int i = 0; i < graph.size(); i++) {
+			
+		}
+	}
+
+	private static void dfs(int row, int col, char symbol) {
+		
+		visited[row][col] = true;
+		if (isInBounds(row, col + 1) && !visited[row][col + 1] && matrix[row][col + 1] == symbol) {
+			graph.add(new Edge(row, col, row, col + 1));
+			dfs(row, col + 1, symbol);
+		}
+		if (isInBounds(row, col - 1) && !visited[row][col - 1] && matrix[row][col - 1] == symbol) {
+			graph.add(new Edge(row, col, row, col - 1));
+			dfs(row, col - 1, symbol);
+		}
+		if (isInBounds(row + 1, col) && !visited[row + 1][col] && matrix[row + 1][col] == symbol) {
+			graph.add(new Edge(row, col, row + 1, col));
+			dfs(row + 1, col, symbol);
+		}
+		if (isInBounds(row - 1, col) && !visited[row - 1][col] && matrix[row - 1][col] == symbol) {
+			graph.add(new Edge(row, col, row - 1, col));
+			dfs(row - 1, col, symbol);
+		}
+	}
+
+	private static boolean isInBounds(int i, int col) {
+		return false;
+	}
+
+	private static boolean isOutOfBounds(int row, int col) {
+		return row < 0 || row >= matrix.length || col < 0 || col >= matrix[row].length;
+	}
+}

@@ -1,0 +1,21 @@
+package graphs;
+
+import java.util.Scanner;
+
+public class AreasInMatrix_02 {
+	
+	public static char[][] matrix;
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		
+		int rows = Integer.parseInt(scanner.nextLine());
+		
+		while (rows-- > 0) {
+			String[] line = scanner.nextLine().split("");
+			for (int i = 0; i < line.length; i++) {
+				System.out.print(line[i]);
+			}
+			System.out.println();
+		}
+	}
+}
